@@ -1,0 +1,10 @@
+name_prefix = "vmseries-test"
+gcp-project = "my-project-name"
+gcp-region = "europe-west2"
+gcp-zone = "europe-west2-c"
+mgmt-subnet-cidr = "10.10.10.0/24"
+outside-subnet-cidr = "10.10.20.0/24"
+inside-subnet-cidr = "10.10.30.0/24"
+pan-os-version = "vmseries-flex-bundle2-1020"
+ssh_keys = "admin:ssh-rsa AAAA....37LTsS5zb2V user@machine"
+allowed_sources = ["0.0.0.0/0"]
