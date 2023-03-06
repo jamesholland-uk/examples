@@ -1,2 +1,1 @@
-# examples
-Examples for sharing with with the world
+# Examples for sharing with with the world
