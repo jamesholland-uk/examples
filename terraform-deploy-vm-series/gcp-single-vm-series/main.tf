@@ -1,8 +1,9 @@
+# The Virtual Private Cloud (VPC)
 module "the_vpc" {
-  source  = "PaloAltoNetworks/vmseries-modules/google//modules/vpc"
-  version = "0.5.0"
+  source     = "PaloAltoNetworks/vmseries-modules/google//modules/vpc"
+  version    = "0.5.0"
   project_id = var.gcp-project
-  region = var.gcp-region
+  region     = var.gcp-region
 
   networks = [
     {
@@ -26,26 +27,27 @@ module "the_vpc" {
   ]
 }
 
+# The VM-Series virtual machine
 module "the_vmseries" {
-  source  = "PaloAltoNetworks/vmseries-modules/google//modules/vmseries"
-  version = "0.5.0"
-  name    = var.name_prefix
-  zone = var.gcp-zone
+  source         = "PaloAltoNetworks/vmseries-modules/google//modules/vmseries"
+  version        = "0.5.0"
+  name           = var.name_prefix
+  zone           = var.gcp-zone
   vmseries_image = var.pan-os-version
   ssh_keys       = var.ssh_keys
 
-    network_interfaces = [
+  network_interfaces = [
     {
-        subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}mgmt"].self_link
-        create_public_ip = true
+      subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}mgmt"].self_link
+      create_public_ip = true
     },
     {
-        subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}outside"].self_link
-        create_public_ip = true
+      subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}outside"].self_link
+      create_public_ip = true
     },
     {
-        subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}inside"].self_link
-        create_public_ip = false
+      subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}inside"].self_link
+      create_public_ip = false
     },
-    ]
+  ]
 }

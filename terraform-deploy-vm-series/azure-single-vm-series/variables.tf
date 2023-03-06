@@ -15,7 +15,7 @@ variable "subscription_id" {
   type = string
 }
 
-# Variable to make each deployment uniquely named and labelled
+# Variable to allow each deployment uniquely named and labelled
 variable "name_prefix" {
   description = "An identifier, ideally unique per deployment to maintain unique names of VNETs, VMs, etc"
   type        = string

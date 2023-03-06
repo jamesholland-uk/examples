@@ -1,10 +1,10 @@
-# Resource Group
+# The Resource Group
 resource "azurerm_resource_group" "the_resourcegroup" {
   name     = "${var.name_prefix}-${var.resource_group}"
   location = var.location
 }
 
-# Virtual Network (VNET)
+# The Virtual Network (VNET)
 module "vnet" {
   source  = "PaloAltoNetworks/vmseries-modules/azurerm//modules/vnet"
   version = "0.5.1"
