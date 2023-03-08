@@ -47,7 +47,7 @@ variable "pan-os-version" {
   type        = string
 }
 
-variable "ssh_keys" {
+variable "ssh_key" {
   description = "SSH key used for initial PAN-OS administrative access"
   type        = string
 }

@@ -34,7 +34,7 @@ module "the_vmseries" {
   name           = var.name_prefix
   zone           = var.gcp-zone
   vmseries_image = var.pan-os-version
-  ssh_keys       = var.ssh_keys
+  ssh_keys       = var.ssh_key
 
   network_interfaces = [
     {

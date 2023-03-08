@@ -14,4 +14,4 @@ allowed_sources     = ["0.0.0.0/0"]
 
 # PAN-OS VM-Series variable values
 pan-os-version = "vmseries-flex-bundle2-1020"
-ssh_keys       = "admin:ssh-rsa AAAA....37LTsS5zb2V user@machine"
+ssh_key        = "admin:ssh-rsa AAAA....37LTsS5zb2V user@machine"
