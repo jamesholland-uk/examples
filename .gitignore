@@ -12,6 +12,7 @@ override.tf.json
 
 # Creds
 gcp.json
+ssh_private_key.pem
 
 # Annoying Mac
 .DS_Store
