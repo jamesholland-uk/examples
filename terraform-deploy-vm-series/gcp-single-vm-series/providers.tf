@@ -4,8 +4,7 @@ terraform {
 
 provider "google" {
   # GCP Variables
-  project = var.gcp-project
-  region  = var.gcp-region
-  # Credentials for connecting to GCP
-  credentials = file("gcp.json")
+  project     = var.gcp-project
+  region      = var.gcp-region
+  credentials = file(var.credentials_file)
 }

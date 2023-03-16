@@ -1,3 +1,3 @@
 # Deploying VM-Series with Terraform
-- [Single VM-Series in Azure](azure-single-vm-series/README.md)
-- [Single VM-Series in GCP](gcp-single-vm-series/README.md)
+Here you will find various styles of deploying VM-Series with Terraform
+- [Single VM-Series, no bootstrapping, no other compute and resources](single-vm-series.md)

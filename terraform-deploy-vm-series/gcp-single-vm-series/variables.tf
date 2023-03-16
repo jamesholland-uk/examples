@@ -20,6 +20,11 @@ variable "gcp-zone" {
   type        = string
 }
 
+variable "credentials_file" {
+  description = "Path to file containing GCP JSON-formatted credentials"
+  type        = string
+}
+
 # GCP Network variable values
 variable "mgmt-subnet-cidr" {
   description = "Address space for ths subnet"
