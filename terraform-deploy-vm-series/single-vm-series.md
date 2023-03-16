@@ -1,5 +1,5 @@
 # Single VM-Series
-AWS, Azure and GCP example of creating just a VM-Series, with PAYG bundle 2 licensing. No other compute or services. No bootstrapping or Panorama attachment (although the code could be modified to include those options if you wish).
+AWS, Azure and GCP examples of creating just a VM-Series, with PAYG bundle 2 licensing. No other compute or services. No bootstrapping or Panorama attachment (although the code could be modified to include those options if you wish).
 
 This is mostly aimed at Palo Alto Networks staff and partners, such as Systems Engineers, who just want a quick way to spin up a VM-Series to test, validate or demonstrate something with an easily disposable PAN-OS device.
 
