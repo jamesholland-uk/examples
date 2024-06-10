@@ -15,3 +15,5 @@ allowed_sources     = ["0.0.0.0/0"]
 # PAN-OS VM-Series variable values
 pan-os-version = "vmseries-flex-bundle2-1020"
 ssh_key        = "admin:ssh-rsa AAAA....37LTsS5zb2V user@machine" # This is an SSH public key. On Mac/Linux you may find this with "cat ~/.ssh/id_rsa.pub", or you may need/want to create a new SSH keypair first
+dns_server_1   = "8.8.8.8"
+dns_server_2   = "8.8.4.4"

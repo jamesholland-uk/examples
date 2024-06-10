@@ -56,3 +56,13 @@ variable "ssh_key" {
   description = "SSH key used for initial PAN-OS administrative access"
   type        = string
 }
+
+variable "dns_server_1" {
+  description = "DNS server 1 for PAN-OS"
+  type        = string
+}
+
+variable "dns_server_2" {
+  description = "DNS server 2 for PAN-OS"
+  type        = string
+}

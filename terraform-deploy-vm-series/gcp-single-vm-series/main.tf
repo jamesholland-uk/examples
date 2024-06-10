@@ -1,52 +1,94 @@
-# The Virtual Private Cloud (VPC)
-module "the_vpc" {
-  source     = "PaloAltoNetworks/vmseries-modules/google//modules/vpc"
-  version    = "0.5.0"
+# The Virtual Private Cloud (VPC) Networks
+module "mgmt-vpc-network" {
+  source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
+  version    = "2.0.0"
   project_id = var.gcp-project
-  region     = var.gcp-region
+  name       = "${var.name_prefix}-mgmt"
 
-  networks = [
-    {
-      name            = "${var.name_prefix}mgmt"
-      subnetwork_name = "${var.name_prefix}mgmt"
+  subnetworks = {
+    "${var.name_prefix}-mgmt-sub" = {
+      name            = "${var.name_prefix}-mgmt-sub"
       ip_cidr_range   = var.mgmt-subnet-cidr
       allowed_sources = var.allowed_sources
-    },
-    {
-      name            = "${var.name_prefix}outside"
-      subnetwork_name = "${var.name_prefix}outside"
+      region          = var.gcp-region
+    }
+  }
+  firewall_rules = {
+    allow-ingress = {
+      name             = "allow-${var.name_prefix}-mgmt-ingress"
+      source_ranges    = ["0.0.0.0/0"]
+      priority         = "1000"
+      allowed_protocol = "all"
+      allowed_ports    = []
+    }
+  }
+}
+
+module "outside-vpc-network" {
+  source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
+  version    = "2.0.0"
+  project_id = var.gcp-project
+  name       = "${var.name_prefix}-outside"
+
+  subnetworks = {
+    "${var.name_prefix}-outside-sub" = {
+      name            = "${var.name_prefix}-outside-sub"
       ip_cidr_range   = var.outside-subnet-cidr
       allowed_sources = var.allowed_sources
-    },
-    {
-      name            = "${var.name_prefix}inside"
-      subnetwork_name = "${var.name_prefix}inside"
+      region          = var.gcp-region
+    }
+  }
+  firewall_rules = {
+    allow-ingress = {
+      name             = "allow-${var.name_prefix}-outside-ingress"
+      source_ranges    = ["0.0.0.0/0"]
+      priority         = "1000"
+      allowed_protocol = "all"
+      allowed_ports    = []
+    }
+  }
+}
+
+module "inside-vpc-network" {
+  source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
+  version    = "2.0.0"
+  project_id = var.gcp-project
+  name       = "${var.name_prefix}-inside"
+
+  subnetworks = {
+    "${var.name_prefix}-inside-sub" = {
+      name            = "${var.name_prefix}-inside-sub"
       ip_cidr_range   = var.inside-subnet-cidr
       allowed_sources = var.allowed_sources
+      region          = var.gcp-region
     }
-  ]
+  }
 }
 
 # The VM-Series virtual machine
 module "the_vmseries" {
-  source         = "PaloAltoNetworks/vmseries-modules/google//modules/vmseries"
-  version        = "0.5.0"
+  source         = "PaloAltoNetworks/swfw-modules/google//modules/vmseries"
+  version        = "2.0.0"
   name           = var.name_prefix
   zone           = var.gcp-zone
   vmseries_image = var.pan-os-version
   ssh_keys       = var.ssh_key
+  bootstrap_options = {
+    dns-primary   = var.dns_server_1
+    dns-secondary = var.dns_server_2
+  }
 
   network_interfaces = [
     {
-      subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}mgmt"].self_link
+      subnetwork       = module.mgmt-vpc-network.subnetworks["${var.name_prefix}-mgmt-sub"].self_link
       create_public_ip = true
     },
     {
-      subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}outside"].self_link
+      subnetwork       = module.outside-vpc-network.subnetworks["${var.name_prefix}-outside-sub"].self_link
       create_public_ip = true
     },
     {
-      subnetwork       = module.the_vpc.subnetworks["${var.name_prefix}inside"].self_link
+      subnetwork       = module.inside-vpc-network.subnetworks["${var.name_prefix}-inside-sub"].self_link
       create_public_ip = false
     },
   ]
