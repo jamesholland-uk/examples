@@ -1,7 +1,7 @@
 # The Virtual Private Cloud (VPC) Networks
 module "mgmt-vpc-network" {
   source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
-  version    = "2.0.0"
+  version    = "~> 2.0.0"
   project_id = var.gcp-project
   name       = "${var.name_prefix}-mgmt"
 
@@ -26,7 +26,7 @@ module "mgmt-vpc-network" {
 
 module "outside-vpc-network" {
   source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
-  version    = "2.0.0"
+  version    = "~> 2.0.0"
   project_id = var.gcp-project
   name       = "${var.name_prefix}-outside"
 
@@ -51,7 +51,7 @@ module "outside-vpc-network" {
 
 module "inside-vpc-network" {
   source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
-  version    = "2.0.0"
+  version    = "~> 2.0.0"
   project_id = var.gcp-project
   name       = "${var.name_prefix}-inside"
 
@@ -68,14 +68,22 @@ module "inside-vpc-network" {
 # The VM-Series virtual machine
 module "the_vmseries" {
   source         = "PaloAltoNetworks/swfw-modules/google//modules/vmseries"
-  version        = "2.0.0"
+  version        = "~> 2.0.0"
   name           = var.name_prefix
   zone           = var.gcp-zone
   vmseries_image = var.pan-os-version
   ssh_keys       = var.ssh_key
   bootstrap_options = {
-    dns-primary   = var.dns_server_1
-    dns-secondary = var.dns_server_2
+    dns-primary                           = var.dns_server_1
+    dns-secondary                         = var.dns_server_2
+    panorama-server                       = var.panorama_primary
+    panorama-server-2                     = var.panorama_secondary
+    dgname                                = var.dgname
+    tplname                               = var.tplname
+    vm-series-auto-registration-pin-id    = var.vm-series-auto-registration-pin-id
+    vm-series-auto-registration-pin-value = var.vm-series-auto-registration-pin-value
+    plugin-op-commands                    = var.plugin-op-commands
+    authcodes                             = var.authcodes
   }
 
   network_interfaces = [

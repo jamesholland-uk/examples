@@ -66,3 +66,39 @@ variable "dns_server_2" {
   description = "DNS server 2 for PAN-OS"
   type        = string
 }
+
+variable "panorama_primary" {
+  description = "Address of primary Panorama. Set value to \"cloud\" when adopting into SCM"
+  type        = string
+}
+variable "panorama_secondary" {
+  description = "Address of secondary Panorama. # Ignored if priarmy is set to \"cloud\" for SCM"
+  type        = string
+}
+variable "dgname" {
+  description = "Name of Panorama Device Group, or Name of Folder if using SCM"
+  type        = string
+}
+variable "vm-series-auto-registration-pin-id" {
+  description = "PIN ID for associating with a specific CSP account (via Thermite Certificate)"
+  type        = string
+}
+variable "vm-series-auto-registration-pin-value" {
+  description = "PIN Value for associating with a specific CSP account (via Thermite Certificate)"
+  type        = string
+}
+
+variable "plugin-op-commands" {
+  description = "Op commands to pass into SWFW"
+  type        = string
+}
+
+variable "authcodes" {
+  description = "License code to pass into SWFW"
+  type        = string
+}
+
+variable "tplname" {
+  description = "Name of Panorama Template, or Name of Label if using SCM"
+  type        = string
+}
