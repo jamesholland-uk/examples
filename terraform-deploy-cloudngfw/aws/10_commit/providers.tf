@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudngfwaws = {
       source  = "paloaltonetworks/cloudngfwaws"
-      version = "1.0.10"
+      version = "4.0.2"
     }
   }
 }
