@@ -1,7 +1,7 @@
 # Create a VPC
 module "the_vpc" {
   source  = "PaloAltoNetworks/vmseries-modules/aws//modules/vpc"
-  version = "0.4.2"
+  version = "1.1.6"
 
   name                    = "${var.name_prefix}_vpc"
   cidr_block              = var.vpc_supernet
@@ -78,7 +78,7 @@ resource "aws_key_pair" "ssh_key_pair" {
 # Create the VM-Series
 module "the_vmseries" {
   source  = "PaloAltoNetworks/vmseries-modules/aws//modules/vmseries"
-  version = "0.4.2"
+  version = "1.1.6"
 
   name                  = var.name_prefix
   vmseries_product_code = var.vm_series_product_code
