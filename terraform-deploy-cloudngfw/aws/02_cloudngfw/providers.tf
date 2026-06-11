@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudngfwaws = {
       source  = "paloaltonetworks/cloudngfwaws"
-      version = "1.0.8"
+      version = "1.0.10"
     }
     aws = {
       source  = "hashicorp/aws"
