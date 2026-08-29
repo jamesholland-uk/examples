@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "the_resourcegroup" {
 # The Virtual Network (VNET)
 module "vnet" {
   source  = "PaloAltoNetworks/vmseries-modules/azurerm//modules/vnet"
-  version = "0.5.5"
+  version = "1.2.4"
 
   virtual_network_name    = "${var.name_prefix}-vnet"
   location                = var.location
@@ -33,7 +33,7 @@ module "vnet" {
 # The VM-Series virtual machine
 module "vmseries" {
   source  = "PaloAltoNetworks/vmseries-modules/azurerm//modules/vmseries"
-  version = "0.5.5"
+  version = "1.2.4"
 
   location            = var.location
   resource_group_name = azurerm_resource_group.the_resourcegroup.name
