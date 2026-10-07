@@ -1,7 +1,7 @@
 # The Virtual Private Cloud (VPC) Networks
 module "mgmt-vpc-network" {
   source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
-  version    = "~> 2.0.0"
+  version    = "2.0.13"
   project_id = var.gcp-project
   name       = "${var.name_prefix}-mgmt"
 
@@ -26,7 +26,7 @@ module "mgmt-vpc-network" {
 
 module "outside-vpc-network" {
   source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
-  version    = "~> 2.0.0"
+  version    = "2.0.13"
   project_id = var.gcp-project
   name       = "${var.name_prefix}-outside"
 
@@ -51,7 +51,7 @@ module "outside-vpc-network" {
 
 module "inside-vpc-network" {
   source     = "PaloAltoNetworks/swfw-modules/google//modules/vpc"
-  version    = "~> 2.0.0"
+  version    = "2.0.13"
   project_id = var.gcp-project
   name       = "${var.name_prefix}-inside"
 
@@ -68,7 +68,7 @@ module "inside-vpc-network" {
 # The VM-Series virtual machine
 module "the_vmseries" {
   source         = "PaloAltoNetworks/swfw-modules/google//modules/vmseries"
-  version        = "~> 2.0.0"
+  version        = "2.0.13"
   name           = var.name_prefix
   zone           = var.gcp-zone
   vmseries_image = var.pan-os-version
